@@ -1,0 +1,5 @@
+# Kişisel / gizli dosyalar — herkese açık siteye GİRMEZ
+# (referans telefonları içeren tam CV'ler ve PDF'ler)
+CV-TR.html
+CV-EN.html
+*.pdf

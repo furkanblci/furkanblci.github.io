@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Furkan Balcı — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--sidebar:#f6f5f9;--ink:#1c1c26;--sub:#3f3f4b;--muted:#63636f;--faint:#9a9aa6;
+    --accent:#6d28d9;--accent-2:#7c3aed;--accent-soft:#f1ebfd;--accent-line:#e2d6fb;--line:#e5e5ec;--line-soft:#eeeef2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#e9e9ee;color:var(--ink);font-family:'Inter',system-ui,'Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .page{width:210mm;min-height:297mm;margin:16px auto;background:var(--bg);box-shadow:0 10px 40px rgba(0,0,0,.18);overflow:hidden}
+
+  .header{display:flex;align-items:center;gap:22px;padding:22px 26px 18px}
+  .idblock{flex:none;max-width:230px}
+  .name{font-weight:800;font-size:33px;line-height:1.0;letter-spacing:.005em;color:var(--ink)}
+  .title{margin-top:7px;font-size:12.5px;font-weight:600;color:var(--accent);letter-spacing:.02em}
+  .vrule{width:1px;align-self:stretch;background:var(--line);margin:2px 0}
+  .contact{flex:1;display:grid;grid-template-columns:1fr;gap:6px}
+  .contact a,.contact .loc{display:flex;gap:9px;align-items:center;font-size:11.5px;color:var(--sub);line-height:1.3}
+  .contact a:hover{color:var(--accent)}
+  .ico{color:var(--accent);flex:none;width:15px;text-align:center;font-weight:700;font-size:12px}
+  .photo{flex:none;width:134px;height:134px;border-radius:50%;object-fit:cover;object-position:50% 20%;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.18),0 0 0 1px var(--line)}
+
+  .links-wrap{padding:0 26px 16px}
+  .links{display:flex;background:var(--accent);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(109,40,217,.25)}
+  .links a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:10px 8px;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.22)}
+  .links a:last-child{border-right:0}
+  .links a:hover{background:var(--accent-2)}
+  .links .g{font-size:12px}
+
+  .body{display:grid;grid-template-columns:62mm 1fr}
+  .side{background:var(--sidebar);padding:20px 20px 24px;border-right:1px solid var(--line);border-top:1px solid var(--line)}
+  .main{padding:18px 26px 22px;border-top:1px solid var(--line)}
+  h2{font-size:14px;font-weight:800;letter-spacing:.02em;color:var(--ink);text-transform:uppercase;padding-bottom:6px;margin-bottom:11px;border-bottom:2px solid var(--accent)}
+  .side h2{font-size:13px}
+  .sec{margin-bottom:17px}.sec:last-child{margin-bottom:0}
+
+  .edu-item{margin-bottom:11px}
+  .edu-item .s{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.3}
+  .edu-item .p{font-size:11px;color:var(--sub);margin-top:1px}
+  .edu-item .d{font-size:10px;color:var(--faint);margin-top:2px;font-weight:500}
+
+  .skill-grp{margin-bottom:9px}
+  .skill-grp .lbl{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chip{font-size:10.5px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:4px;padding:3px 7px;line-height:1.2}
+
+  .lang{font-size:11.5px;color:var(--sub);margin:5px 0;display:flex;justify-content:space-between;gap:8px}
+  .lang b{color:var(--ink);font-weight:600}.lang span{color:var(--faint)}
+  .ref{margin-bottom:10px}
+  .ref b{display:block;font-size:11px;color:var(--ink);font-weight:700}
+  .ref small{display:block;color:var(--muted);font-size:10px;margin-top:1px}
+  .ref .ph{color:var(--faint);font-size:10px}
+
+  .summary{font-size:11.5px;line-height:1.6;color:var(--sub)}.summary b{color:var(--ink);font-weight:600}
+  .job{padding:7px 0;border-bottom:1px solid var(--line-soft)}.job:last-child{border-bottom:0}
+  .job .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .job .co{font-size:12.5px;font-weight:700;color:var(--ink)}.job .co .rl{color:var(--accent);font-weight:700}
+  .job .date{font-size:10px;color:var(--faint);white-space:nowrap;font-weight:500;font-style:italic}
+  .job .d{font-size:11px;color:var(--muted);line-height:1.52;margin-top:4px}.job .d b{color:var(--sub);font-weight:600}
+
+  .proj{padding:6px 0;border-bottom:1px solid var(--line-soft)}.proj:last-of-type{border-bottom:0}
+  .proj .t{font-size:12px;font-weight:700;color:var(--ink)}
+  .proj .meta{font-size:10.5px;color:var(--accent);margin:2px 0 2px;font-weight:600}
+  .proj .d{font-size:10.5px;color:var(--muted);line-height:1.45}
+  .award{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.04em;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:4px;padding:2px 6px;margin-left:5px;vertical-align:middle;text-transform:uppercase}
+  .more{font-size:10.5px;color:var(--muted);margin-top:8px}.more a{color:var(--accent);font-weight:700}
+
+  @media print{@page{size:A4;margin:0}html,body{background:#fff}.page{margin:0;box-shadow:none;width:210mm}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  @media(max-width:800px){.page{width:100%}.body{grid-template-columns:1fr}.header{flex-wrap:wrap}.links{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="idblock">
+      <div class="name">FURKAN<br>BALCI</div>
+      <div class="title">Game Developer · Unity / C#</div>
+    </div>
+    <div class="vrule"></div>
+    <div class="contact">
+      <a href="mailto:cpn1230@gmail.com"><span class="ico">✉</span>cpn1230@gmail.com</a>
+      <a href="tel:+905362613512"><span class="ico">☎</span>+90 536 261 3512</a>
+      <a href="https://linkedin.com/in/furkanbalcı"><span class="ico">in</span>LinkedIn</a>
+      <span class="loc"><span class="ico">◉</span>Istanbul, Türkiye</span>
+    </div>
+    <img class="photo" src="1.jpg" alt="Furkan Balcı">
+  </header>
+
+  <div class="links-wrap">
+    <nav class="links">
+      <a href="https://furkanbalci.itch.io"><span class="g">◈</span>Itch.io</a>
+      <a href="https://store.steampowered.com/app/3207800"><span class="g">▶</span>Steam</a>
+      <a href="https://github.com/furkanblci"><span class="g">⌘</span>GitHub</a>
+      <a href="https://furkanblci.github.io"><span class="g">◆</span>Website</a>
+    </nav>
+  </div>
+
+  <div class="body">
+    <aside class="side">
+      <div class="sec">
+        <h2>Education</h2>
+        <div class="edu-item">
+          <div class="s">Istanbul Topkapı University</div>
+          <div class="p">Digital Game Design</div>
+          <div class="d">2022 – 2026</div>
+        </div>
+        <div class="edu-item">
+          <div class="s">Şehit Osman Yıldız Vocational &amp; Technical Anatolian High School</div>
+          <div class="p">Information Technologies</div>
+          <div class="d">2015 – 2019</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2>Skills</h2>
+        <div class="skill-grp"><div class="lbl">Game Engines</div>
+          <div class="chips"><span class="chip">Unity</span><span class="chip">Unreal Engine</span><span class="chip">Godot</span><span class="chip">Twine</span><span class="chip">Bitsy</span><span class="chip">PuzzleScript</span></div></div>
+        <div class="skill-grp"><div class="lbl">Programming</div>
+          <div class="chips"><span class="chip">C#</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">PHP</span></div></div>
+        <div class="skill-grp"><div class="lbl">Tools</div>
+          <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Sourcetree</span><span class="chip">Rider</span><span class="chip">VS Code</span></div></div>
+        <div class="skill-grp"><div class="lbl">Design &amp; Art</div>
+          <div class="chips"><span class="chip">Blender</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Animate</span></div></div>
+        <div class="skill-grp"><div class="lbl">AI Tools</div>
+          <div class="chips"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Gemini</span><span class="chip">Meshy</span><span class="chip">Vibecoding</span></div></div>
+      </div>
+
+      <div class="sec">
+        <h2>Languages</h2>
+        <div class="lang"><b>Turkish</b><span>Native</span></div>
+        <div class="lang"><b>English</b><span></span></div>
+      </div>
+
+      <div class="sec">
+        <h2>References</h2>
+        <div class="ref" style="color:var(--muted);font-size:11px">Available on request.</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="sec">
+        <h2>About Me</h2>
+        <p class="summary">I'm a game developer working with Unity and C#, and a <b>Digital Game Design</b> graduate from Istanbul Topkapı University. From building mechanics and gameplay systems to level design and GDD writing, I've worked across every part of game development and I'm used to <b>delivering within a team</b>. I've been involved in 20+ projects — contributing to some and building others from the ground up. I've also gained experience in <b>mobile game development and optimization</b>. Right now I'm preparing my school team's graduation project for <b>release on Steam</b> and publishing two new games on <b>Google Play</b>.</p>
+      </div>
+
+      <div class="sec">
+        <h2>Experience</h2>
+        <div class="job">
+          <div class="top"><div class="co">Pattern Games <span class="rl">— Game Developer</span></div><div class="date">2023 – 2025 · 2.5 yrs</div></div>
+          <div class="d">Over 2.5 years our team built a <b>3D FPS</b>, now live as a demo on Steam. I worked mainly on developing <b>gameplay and game systems in C#</b>, and also contributed across many areas of the project, including level design. Along the way we exhibited at various events, ran booths to showcase our game, and won <b>1st places and awards</b> at the jams and competitions we entered.</div>
+        </div>
+        <div class="job">
+          <div class="top"><div class="co">UDO <span class="rl">— Game Developer Intern</span></div><div class="date">Jul – Aug 2025 · 2 months</div></div>
+          <div class="d">After initial training, the team we formed went through ideation and project selection to build a market-oriented mobile game. In the process I gained hands-on experience in <b>mobile game development and mobile optimization</b>.</div>
+        </div>
+        <div class="job">
+          <div class="top"><div class="co">Ciner Holding <span class="rl">— IT Intern</span></div><div class="date">2018 – 2019 · 9 months</div></div>
+          <div class="d">Spent 9 months in the IT department gaining hands-on <b>software and hardware</b> experience, while developing a strong sense of professional and corporate culture.</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2>Featured Projects</h2>
+        <div class="proj">
+          <div class="t">Carry On Together</div>
+          <div class="meta">Graduation Project · Releasing on Steam</div>
+          <div class="d">A co-op party sim where you haul and move things together with friends.</div>
+        </div>
+        <div class="proj">
+          <div class="t">Madness of the Science</div>
+          <div class="meta">3D FPS · Steam (Demo) · Pattern Games</div>
+          <div class="d">A 3D FPS we built as a team over 2.5 years, now live as a demo on Steam.</div>
+        </div>
+        <div class="proj">
+          <div class="t">UDO Stock Match</div>
+          <div class="meta">Mobile · Internship Project</div>
+          <div class="d">A mobile matching game where you collect and match objects on a conveyor belt.</div>
+        </div>
+        <div class="proj">
+          <div class="t">Soul Gate <span class="award">1st Place</span></div>
+          <div class="meta">3D Isometric Action · StartGate Game Jam</div>
+        </div>
+        <div class="proj">
+          <div class="t">Devil Journey <span class="award">Best Game Design</span></div>
+          <div class="meta">2D Puzzle-Platformer · Global Game Jam</div>
+        </div>
+        <div class="more">20+ games and other projects → <a href="https://furkanbalci.itch.io">furkanbalci.itch.io</a></div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

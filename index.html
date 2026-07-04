@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Furkan Balcı — Game Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08080d;
+    --bg-2:#0d0d16;
+    --panel:#12121d;
+    --panel-2:#171725;
+    --ink:#ececf5;
+    --muted:#a6a6b8;
+    --faint:#6f6f83;
+    --neon:#b57bff;
+    --neon-2:#8b5cf6;
+    --neon-3:#c96bff;
+    --line:#22223339;
+    --border:#26263a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,'Segoe UI',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--neon);color:#0a0a0f}
+  h1,h2,h3,.dsp{font-family:'Space Grotesk','Inter',sans-serif}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#2a2a40;border-radius:6px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--neon-2)}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- NAV ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s;
+    background:rgba(8,8,13,.55);backdrop-filter:blur(14px);border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(8,8,13,.9);border-bottom:1px solid var(--border)}
+  .nav-in{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:20px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:.02em}
+  .logo b{color:var(--neon);text-shadow:0 0 14px rgba(181,123,255,.6)}
+  .nav-links{margin-left:auto;display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:13.5px;color:var(--muted);font-weight:500;transition:.2s;position:relative}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--neon);transition:.25s;box-shadow:0 0 8px var(--neon)}
+  .nav-links a:hover::after{width:100%}
+  .btn-cv{padding:8px 16px;border:1px solid var(--neon-2);border-radius:8px;color:var(--ink)!important;
+    font-weight:600;font-size:13px;transition:.25s}
+  .btn-cv:hover{background:var(--neon-2);box-shadow:0 0 20px rgba(139,92,246,.5)}
+  .lang{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .lang button{background:none;border:0;color:var(--faint);font:inherit;font-size:12px;font-weight:700;
+    padding:6px 10px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--neon-2);color:#fff}
+  .burger{display:none;margin-left:auto;background:none;border:0;color:var(--ink);font-size:24px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;z-index:0}
+  .orb.a{width:520px;height:520px;background:radial-gradient(circle,#7c3aed,transparent 70%);top:-120px;right:-80px;animation:float1 14s ease-in-out infinite}
+  .orb.b{width:440px;height:440px;background:radial-gradient(circle,#b57bff,transparent 70%);bottom:-140px;left:-120px;animation:float2 18s ease-in-out infinite}
+  .orb.c{width:300px;height:300px;background:radial-gradient(circle,#5b21b6,transparent 70%);top:40%;left:45%;opacity:.3;animation:float1 20s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,40px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-30px)}}
+  .grid-bg{position:absolute;inset:0;z-index:0;opacity:.35;
+    background-image:linear-gradient(rgba(139,92,246,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.09) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%)}
+  .hero-in{position:relative;z-index:2;width:100%}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--neon);
+    letter-spacing:.06em;background:rgba(139,92,246,.1);border:1px solid #3a2a63;padding:7px 14px;border-radius:100px;margin-bottom:22px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{font-size:clamp(44px,8vw,86px);font-weight:700;line-height:.98;letter-spacing:-.01em}
+  .hero h1 .g{background:linear-gradient(120deg,#fff 20%,#b57bff 55%,#8b5cf6 90%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 30px rgba(181,123,255,.3))}
+  .hero .sub{margin-top:22px;font-size:clamp(15px,2vw,19px);color:var(--muted);max-width:560px}
+  .hero .sub b{color:var(--ink);font-weight:600}
+  .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:13px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:10px;font-weight:600;font-size:14.5px;transition:.25s;border:1px solid transparent}
+  .btn.primary{background:linear-gradient(120deg,var(--neon-2),var(--neon-3));color:#fff;box-shadow:0 8px 30px rgba(139,92,246,.4)}
+  .btn.primary:hover{transform:translateY(-3px);box-shadow:0 12px 38px rgba(139,92,246,.6)}
+  .btn.ghost{border-color:var(--border);color:var(--ink);background:rgba(255,255,255,.02)}
+  .btn.ghost:hover{border-color:var(--neon-2);background:rgba(139,92,246,.12);transform:translateY(-3px)}
+  .scroll-ind{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:var(--faint);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2s infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;position:relative}
+  .sec-head{margin-bottom:46px}
+  .sec-tag{font-family:'Space Grotesk';color:var(--neon);font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .sec-title{font-size:clamp(30px,5vw,44px);font-weight:700;margin-top:8px;letter-spacing:-.01em}
+  .sec-title .g{color:var(--neon)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-40px;position:relative;z-index:3}
+  .stat{background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--border);border-radius:14px;padding:22px 18px;text-align:center;transition:.3s}
+  .stat:hover{border-color:var(--neon-2);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.4)}
+  .stat .n{font-family:'Space Grotesk';font-size:34px;font-weight:700;color:#fff;line-height:1}
+  .stat .n span{color:var(--neon)}
+  .stat .l{margin-top:8px;font-size:12.5px;color:var(--muted)}
+
+  /* about */
+  .about{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center}
+  .about-photo{position:relative;justify-self:center}
+  .about-photo img{width:250px;height:250px;object-fit:cover;object-position:50% 20%;border-radius:20px;position:relative;z-index:2}
+  .about-photo::before{content:"";position:absolute;inset:-3px;border-radius:23px;background:linear-gradient(135deg,var(--neon),var(--neon-2),transparent);z-index:1;filter:blur(2px)}
+  .about-photo::after{content:"";position:absolute;inset:-20px;border-radius:30px;background:radial-gradient(circle,rgba(139,92,246,.35),transparent 70%);z-index:0;filter:blur(20px)}
+  .about p{color:var(--muted);font-size:15.5px;margin-bottom:14px}
+  .about p b{color:var(--ink);font-weight:600}
+  .about .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+  .about .tags span{font-size:12.5px;color:var(--neon);background:rgba(139,92,246,.1);border:1px solid #3a2a63;border-radius:100px;padding:5px 13px}
+
+  /* projects */
+  .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .card{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:var(--neon-2);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .card .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,#1a1430,#0e0e18)}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .card:hover .thumb img{transform:scale(1.06)}
+  .card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(18,18,29,.9),transparent 55%)}
+  .badge{position:absolute;top:12px;right:12px;z-index:3;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    background:linear-gradient(120deg,var(--neon-2),var(--neon-3));color:#fff;padding:5px 10px;border-radius:100px;box-shadow:0 4px 14px rgba(139,92,246,.5)}
+  .badge.steam{background:linear-gradient(120deg,#1b2838,#2a475e);box-shadow:0 4px 14px rgba(0,0,0,.5)}
+  .card .body{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:19px;font-weight:700}
+  .card .meta{font-size:12px;color:var(--neon);font-weight:600;margin:5px 0 9px}
+  .card .desc{font-size:13.5px;color:var(--muted);flex:1}
+  .card .links{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap}
+  .card .links a{font-size:12.5px;font-weight:600;color:var(--ink);border:1px solid var(--border);padding:7px 12px;border-radius:8px;transition:.2s;display:inline-flex;gap:6px;align-items:center}
+  .card .links a:hover{border-color:var(--neon-2);background:rgba(139,92,246,.12);color:var(--neon)}
+
+  /* other games grid */
+  .grid-games{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px}
+  .mini{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;transition:.3s;display:block}
+  .mini img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .mini:hover{transform:translateY(-5px);border-color:var(--neon-2);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+  .mini:hover img{transform:scale(1.08)}
+  .mini .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
+    background:linear-gradient(to top,rgba(8,8,13,.95),rgba(8,8,13,.2) 60%,transparent)}
+  .mini .ov h4{font-size:15px;font-weight:700}
+  .mini .ov p{font-size:11.5px;color:var(--neon);font-weight:600;margin-top:2px}
+  .center{text-align:center;margin-top:40px}
+
+  /* experience timeline */
+  .timeline{position:relative;max-width:760px;margin:0 auto;padding-left:34px}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--neon-2),transparent)}
+  .tl{position:relative;padding-bottom:34px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{content:"";position:absolute;left:-33px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--neon-2);box-shadow:0 0 12px rgba(139,92,246,.6)}
+  .tl .role{font-size:18px;font-weight:700}
+  .tl .role span{color:var(--neon)}
+  .tl .co-date{font-size:13px;color:var(--faint);margin:3px 0 9px;font-family:'Space Grotesk'}
+  .tl .d{font-size:14px;color:var(--muted)}
+  .tl .d b{color:var(--ink);font-weight:600}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .skill-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:.3s}
+  .skill-card:hover{border-color:var(--neon-2);box-shadow:0 12px 34px rgba(0,0,0,.4)}
+  .skill-card .h{font-family:'Space Grotesk';font-size:13px;font-weight:600;color:var(--neon);text-transform:uppercase;letter-spacing:.06em;margin-bottom:13px}
+  .skill-card .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .skill-card .chips span{font-size:13px;color:var(--ink);background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;transition:.2s}
+  .skill-card .chips span:hover{border-color:var(--neon-2);color:var(--neon);transform:translateY(-2px)}
+
+  /* contact */
+  .contact-box{text-align:center;background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--border);border-radius:22px;padding:60px 30px;position:relative;overflow:hidden}
+  .contact-box::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:300px;background:radial-gradient(circle,rgba(139,92,246,.28),transparent 70%);filter:blur(30px)}
+  .contact-box h2{position:relative;font-size:clamp(28px,4vw,40px);font-weight:700}
+  .contact-box p{position:relative;color:var(--muted);margin:14px 0 30px;font-size:16px}
+  .socials{position:relative;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  .socials a{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;border:1px solid var(--border);font-weight:600;font-size:14px;transition:.25s}
+  .socials a:hover{border-color:var(--neon-2);background:rgba(139,92,246,.14);transform:translateY(-3px);color:var(--neon)}
+  .socials a.mail{background:linear-gradient(120deg,var(--neon-2),var(--neon-3));border-color:transparent;color:#fff}
+  .socials a.mail:hover{color:#fff;box-shadow:0 10px 30px rgba(139,92,246,.5)}
+
+  footer{padding:34px 0;border-top:1px solid var(--border);text-align:center;color:var(--faint);font-size:13px}
+  footer b{color:var(--neon)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* responsive */
+  @media(max-width:860px){
+    .nav-links{display:none}.burger{display:block}
+    .nav-links.open{display:flex;position:absolute;top:100%;right:0;left:0;flex-direction:column;gap:16px;background:rgba(8,8,13,.97);padding:22px 24px;border-bottom:1px solid var(--border)}
+    .nav-links.open{align-items:flex-start}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .about{grid-template-columns:1fr;gap:30px}
+    .feat{grid-template-columns:1fr}
+    .grid-games{grid-template-columns:repeat(2,1fr)}
+    .skills{grid-template-columns:1fr}
+  }
+  @media(max-width:480px){.grid-games{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <div class="logo">FURKAN<b>.</b>BALCI</div>
+    <button class="burger" id="burger">☰</button>
+    <div class="nav-links" id="navlinks">
+      <a href="#about" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+      <a href="#projects" data-tr="Projeler" data-en="Projects">Projeler</a>
+      <a href="#experience" data-tr="Deneyim" data-en="Experience">Deneyim</a>
+      <a href="#skills" data-tr="Yetenekler" data-en="Skills">Yetenekler</a>
+      <a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a>
+      <a class="btn-cv" id="cvlink" href="resume-tr.html" target="_blank">CV</a>
+      <div class="lang">
+        <button data-lang="tr" class="on">TR</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="grid-bg"></div>
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="wrap hero-in">
+    <div class="eyebrow"><span class="dot"></span><span data-tr="Game Developer · Unity / C#" data-en="Game Developer · Unity / C#">Game Developer · Unity / C#</span></div>
+    <h1><span class="g">FURKAN BALCI</span></h1>
+    <p class="sub" data-tr="Oyun geliştirmenin her alanında çalışan, <b>Steam'de oyunu yayında olan</b> bir Unity / C# geliştiricisi. Prototipten cilaya, mekanikten level tasarımına." data-en="A Unity / C# developer working across every part of game-making, with a <b>title live on Steam</b>. From prototype to polish, mechanics to level design.">Oyun geliştirmenin her alanında çalışan, <b>Steam'de oyunu yayında olan</b> bir Unity / C# geliştiricisi. Prototipten cilaya, mekanikten level tasarımına.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects" data-tr="Projelerim" data-en="My Projects">Projelerim</a>
+      <a class="btn ghost" href="https://store.steampowered.com/app/3207800" target="_blank">▶ Steam</a>
+      <a class="btn ghost" href="https://furkanbalci.itch.io" target="_blank">◈ itch.io</a>
+      <a class="btn ghost" id="cvlink2" href="resume-tr.html" target="_blank" data-tr="CV İndir" data-en="Download CV">CV İndir</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><span data-tr="Kaydır" data-en="Scroll">Kaydır</span><span>↓</span></div>
+</header>
+
+<div class="wrap">
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat reveal"><div class="n">20<span>+</span></div><div class="l" data-tr="Oyun & Prototip" data-en="Games & Prototypes">Oyun & Prototip</div></div>
+    <div class="stat reveal"><div class="n">8</div><div class="l" data-tr="Game Jam" data-en="Game Jams">Game Jam</div></div>
+    <div class="stat reveal"><div class="n">2</div><div class="l" data-tr="Ödül & Birincilik" data-en="Awards & Wins">Ödül & Birincilik</div></div>
+    <div class="stat reveal"><div class="n">2.5<span>y</span></div><div class="l" data-tr="Ekip Deneyimi" data-en="Team Experience">Ekip Deneyimi</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="sec-tag" data-tr="01 — Hakkımda" data-en="01 — About">01 — Hakkımda</div>
+    <div class="sec-title" data-tr="Ben <span class='g'>kimim</span>?" data-en="Who <span class='g'>I am</span>">Ben <span class="g">kimim</span>?</div>
+  </div>
+  <div class="about">
+    <div class="about-photo reveal"><img src="1.jpg" alt="Furkan Balcı"></div>
+    <div class="reveal">
+      <p data-tr="Unity ve C# ile geliştirme yapan bir oyun geliştiricisiyim; İstanbul Topkapı Üniversitesi <b>Dijital Oyun Tasarımı</b> bölümünden mezun oldum." data-en="I'm a game developer working with Unity and C#, and a <b>Digital Game Design</b> graduate from Istanbul Topkapı University.">Unity ve C# ile geliştirme yapan bir oyun geliştiricisiyim; İstanbul Topkapı Üniversitesi <b>Dijital Oyun Tasarımı</b> bölümünden mezun oldum.</p>
+      <p data-tr="Mekanik ve oynanış sistemleri kurmaktan level tasarımına ve GDD yazımına kadar oyun geliştirmenin her alanında çalıştım ve <b>ekip içinde üretmeye</b> alışkınım. 20'den fazla projede yer aldım; bir kısmına katkı sundum, bir kısmını sıfırdan geliştirdim." data-en="From building mechanics and gameplay systems to level design and GDD writing, I've worked across every part of game development and I'm used to <b>delivering within a team</b>. I've been involved in 20+ projects — contributing to some and building others from the ground up.">Mekanik ve oynanış sistemleri kurmaktan level tasarımına ve GDD yazımına kadar oyun geliştirmenin her alanında çalıştım ve <b>ekip içinde üretmeye</b> alışkınım. 20'den fazla projede yer aldım; bir kısmına katkı sundum, bir kısmını sıfırdan geliştirdim.</p>
+      <p data-tr="Ayrıca mobil oyun geliştirme ve optimizasyon konusunda deneyim edindim. Şu anda okul ekibimle bitirme projemizi <b>Steam'de yayına</b> hazırlıyor, 2 yeni oyunumu da <b>Google Play'de</b> yayınlıyorum." data-en="I've also gained experience in mobile game development and optimization. Right now I'm preparing my school team's graduation project for <b>release on Steam</b> and publishing two new games on <b>Google Play</b>.">Ayrıca mobil oyun geliştirme ve optimizasyon konusunda deneyim edindim. Şu anda okul ekibimle bitirme projemizi <b>Steam'de yayına</b> hazırlıyor, 2 yeni oyunumu da <b>Google Play'de</b> yayınlıyorum.</p>
+      <div class="tags"><span>Unity</span><span>C#</span><span>Gameplay</span><span>Level Design</span><span>GDD</span><span>Mobile</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PROJECTS -->
+<section id="projects"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="sec-tag" data-tr="02 — Projeler" data-en="02 — Projects">02 — Projeler</div>
+    <div class="sec-title" data-tr="Öne çıkan <span class='g'>oyunlar</span>" data-en="Featured <span class='g'>games</span>">Öne çıkan <span class="g">oyunlar</span></div>
+  </div>
+
+  <div class="feat">
+    <!-- Carry On Together -->
+    <div class="card reveal">
+      <div class="thumb" style="background:linear-gradient(135deg,#3b1d6e,#160f2b)">
+        <span class="badge" data-tr="Yakında · Steam" data-en="Soon · Steam">Yakında · Steam</span>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:26px;font-weight:700;color:rgba(255,255,255,.9);text-shadow:0 0 24px rgba(181,123,255,.7)">Carry On Together</div>
+      </div>
+      <div class="body">
+        <h3>Carry On Together</h3>
+        <div class="meta" data-tr="Bitirme Projesi · Co-op Party Sim" data-en="Graduation Project · Co-op Party Sim">Bitirme Projesi · Co-op Party Sim</div>
+        <div class="desc" data-tr="Arkadaşlarınla birlikte eşya taşıdığın, co-op bir parti simülasyonu. Şu anda Steam'de yayına hazırlanıyor." data-en="A co-op party sim where you haul and move things together with friends. Currently heading to release on Steam.">Arkadaşlarınla birlikte eşya taşıdığın, co-op bir parti simülasyonu. Şu anda Steam'de yayına hazırlanıyor.</div>
+        <div class="links"><span style="font-size:12.5px;color:var(--faint);border:1px dashed var(--border);padding:7px 12px;border-radius:8px" data-tr="Çok yakında" data-en="Coming soon">Çok yakında</span></div>
+      </div>
+    </div>
+
+    <!-- Madness of the Science -->
+    <div class="card reveal">
+      <div class="thumb">
+        <span class="badge steam">Steam · Demo</span>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/3207800/header.jpg" alt="Madness of the Science" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Madness of the Science</h3>
+        <div class="meta">3D FPS · Pattern Games</div>
+        <div class="desc" data-tr="Ekiple ~2,5 yılda geliştirdiğimiz, Steam'de demosu yayında olan 3D bilim kurgu FPS." data-en="A 3D sci-fi FPS built with the team over ~2.5 years, now live as a demo on Steam.">Ekiple ~2,5 yılda geliştirdiğimiz, Steam'de demosu yayında olan 3D bilim kurgu FPS.</div>
+        <div class="links"><a href="https://store.steampowered.com/app/3207800" target="_blank">▶ Steam</a></div>
+      </div>
+    </div>
+
+    <!-- Soul Gate -->
+    <div class="card reveal">
+      <div class="thumb">
+        <span class="badge" data-tr="🏆 1.'lik" data-en="🏆 1st Place">🏆 1.'lik</span>
+        <img src="https://img.itch.zone/aW1nLzE5MTMwMjYzLmpwZw==/original/AOmlE2.jpg" alt="Soul Gate" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Soul Gate</h3>
+        <div class="meta" data-tr="3D İzometrik Aksiyon · StartGate Game Jam" data-en="3D Isometric Action · StartGate Game Jam">3D İzometrik Aksiyon · StartGate Game Jam</div>
+        <div class="desc" data-tr="48 saatte geliştirdiğimiz ve birincilik kazandığımız 3D izometrik aksiyon oyunu." data-en="A 3D isometric action game built in 48 hours that won 1st place.">48 saatte geliştirdiğimiz ve birincilik kazandığımız 3D izometrik aksiyon oyunu.</div>
+        <div class="links"><a href="https://lymite.itch.io/soul-gate" target="_blank">◈ itch.io</a></div>
+      </div>
+    </div>
+
+    <!-- Devil Journey -->
+    <div class="card reveal">
+      <div class="thumb">
+        <span class="badge" data-tr="🏆 En İyi Tasarım" data-en="🏆 Best Design">🏆 En İyi Tasarım</span>
+        <img src="https://img.itch.zone/aW1hZ2UvMjQ5NzA3NS8xNDg1NjkwOS5wbmc=/347x500/xeAQAv.png" alt="Devil Journey" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Devil Journey</h3>
+        <div class="meta" data-tr="2D Puzzle-Platformer · Global Game Jam" data-en="2D Puzzle-Platformer · Global Game Jam">2D Puzzle-Platformer · Global Game Jam</div>
+        <div class="desc" data-tr="Global Game Jam'de 48 saatte geliştirdiğimiz, 'En İyi Oyun Tasarımı' ödüllü 2D puzzle-platformer." data-en="A 2D puzzle-platformer built in 48h at Global Game Jam, winner of 'Best Game Design'.">Global Game Jam'de 48 saatte geliştirdiğimiz, 'En İyi Oyun Tasarımı' ödüllü 2D puzzle-platformer.</div>
+        <div class="links"><a href="https://furkanbalci.itch.io/devil-journey" target="_blank">◈ itch.io</a></div>
+      </div>
+    </div>
+
+    <!-- UDO Stock Match -->
+    <div class="card reveal">
+      <div class="thumb">
+        <span class="badge" data-tr="Mobil · Staj" data-en="Mobile · Internship">Mobil · Staj</span>
+        <img src="https://img.itch.zone/aW1nLzIyNTUxNjIzLnBuZw==/347x500/kmUURn.png" alt="UDO Stock Match" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>UDO Stock Match</h3>
+        <div class="meta" data-tr="Mobil Puzzle · UDO Games" data-en="Mobile Puzzle · UDO Games">Mobil Puzzle · UDO Games</div>
+        <div class="desc" data-tr="UDO stajında ekiple geliştirdiğimiz; konveyör bandındaki objeleri toplayıp eşleştirdiğin mobil puzzle oyunu." data-en="Built with the team during my UDO internship; a mobile puzzle where you collect and match objects on a conveyor belt.">UDO stajında ekiple geliştirdiğimiz; konveyör bandındaki objeleri toplayıp eşleştirdiğin mobil puzzle oyunu.</div>
+        <div class="links"><a href="https://ibrahim-gumusdal.itch.io/udo-stock-match" target="_blank">◈ itch.io</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER GAMES -->
+  <div class="sec-head reveal" style="margin-top:76px">
+    <div class="sec-tag" data-tr="Daha fazlası" data-en="More">Daha fazlası</div>
+    <div class="sec-title" data-tr="Diğer <span class='g'>oyunlar</span>" data-en="Other <span class='g'>games</span>">Diğer <span class="g">oyunlar</span></div>
+  </div>
+  <div class="grid-games">
+    <a class="mini reveal" href="https://furkanbalci.itch.io/moonsway" target="_blank"><img src="https://img.itch.zone/aW1hZ2UvMzUzMDY4OC8yMTAzMDI0Ni5wbmc=/347x500/g19hPN.png" alt="Moon's Way" loading="lazy"><div class="ov"><h4>Moon's Way</h4><p data-tr="Third-Person Shooter · İTÜ Jam" data-en="Third-Person Shooter · İTÜ Jam">Third-Person Shooter · İTÜ Jam</p></div></a>
+    <a class="mini reveal" href="https://hetrixtr.itch.io/neon-vendetta" target="_blank"><img src="https://img.itch.zone/aW1nLzE1NjM0OTA3LnBuZw==/original/HYzaJl.png" alt="Neon Vendetta" loading="lazy"><div class="ov"><h4>Neon Vendetta</h4><p data-tr="2D Action Shooter" data-en="2D Action Shooter">2D Action Shooter</p></div></a>
+    <a class="mini reveal" href="https://furkanbalci.itch.io/white-rescue" target="_blank"><img src="https://img.itch.zone/aW1hZ2UvMzI4ODU2My8xOTYyODAzOC5wbmc=/347x500/HIF7ZW.png" alt="White Rescue" loading="lazy"><div class="ov"><h4>White Rescue</h4><p data-tr="3. Şahıs · Açık Dünya" data-en="Third-Person · Open World">3. Şahıs · Açık Dünya</p></div></a>
+    <a class="mini reveal" href="https://furkanbalci.itch.io/blattodea" target="_blank"><img src="https://img.itch.zone/aW1hZ2UvMzE0NjcyNS8xODgyNTIyNC5wbmc=/347x500/gT%2B2XT.png" alt="Blattodea" loading="lazy"><div class="ov"><h4>Blattodea</h4><p data-tr="Mobil · Puzzle & Narrative" data-en="Mobile · Puzzle & Narrative">Mobil · Puzzle & Narrative</p></div></a>
+    <a class="mini reveal" href="https://furkanbalci.itch.io/lazcar-gp" target="_blank"><img src="https://img.itch.zone/aW1nLzIxNjQzMDc2LnBuZw==/original/rfEwAA.png" alt="LazCar GP" loading="lazy"><div class="ov"><h4>LazCar GP</h4><p data-tr="Mobil · Yarış" data-en="Mobile · Racing">Mobil · Yarış</p></div></a>
+    <a class="mini reveal" href="https://furkanbalci.itch.io" target="_blank" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1430,#0e0e18)"><div style="text-align:center;padding:14px"><div style="font-size:30px">→</div><div style="font-weight:700;margin-top:6px" data-tr="Tümünü gör" data-en="See all">Tümünü gör</div><div style="font-size:11.5px;color:var(--faint);margin-top:2px">itch.io</div></div></a>
+  </div>
+</div></section>
+
+<!-- EXPERIENCE -->
+<section id="experience"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="sec-tag" data-tr="03 — Deneyim" data-en="03 — Experience">03 — Deneyim</div>
+    <div class="sec-title" data-tr="Nerede <span class='g'>çalıştım</span>" data-en="Where I've <span class='g'>worked</span>">Nerede <span class="g">çalıştım</span></div>
+  </div>
+  <div class="timeline">
+    <div class="tl reveal">
+      <div class="role">Pattern Games <span data-tr="— Oyun Geliştirici" data-en="— Game Developer">— Oyun Geliştirici</span></div>
+      <div class="co-date">2023 – 2025 · 2.5 <span data-tr="yıl" data-en="yrs">yıl</span></div>
+      <div class="d" data-tr="Ekiple, Steam'de demosu yayında olan bir <b>3D FPS</b> geliştirdik. Ağırlıklı olarak <b>C# ile oynanış ve oyun sistemleri</b> üzerine çalıştım; seviye tasarımı dâhil birçok alanda görev aldım. Etkinliklerde stand açtık ve katıldığımız jam'lerde <b>birincilikler, ödüller</b> kazandık." data-en="With the team we built a <b>3D FPS</b>, now live as a demo on Steam. I worked mainly on <b>gameplay and game systems in C#</b>, and contributed across many areas including level design. We ran booths at events and won <b>1st places and awards</b> at the jams we entered.">Ekiple, Steam'de demosu yayında olan bir <b>3D FPS</b> geliştirdik. Ağırlıklı olarak <b>C# ile oynanış ve oyun sistemleri</b> üzerine çalıştım; seviye tasarımı dâhil birçok alanda görev aldım. Etkinliklerde stand açtık ve katıldığımız jam'lerde <b>birincilikler, ödüller</b> kazandık.</div>
+    </div>
+    <div class="tl reveal">
+      <div class="role">UDO <span data-tr="— Oyun Geliştirici Stajyeri" data-en="— Game Developer Intern">— Oyun Geliştirici Stajyeri</span></div>
+      <div class="co-date" data-tr="Tem – Ağu 2025 · 2 ay" data-en="Jul – Aug 2025 · 2 months">Tem – Ağu 2025 · 2 ay</div>
+      <div class="d" data-tr="Eğitimlerin ardından kurduğumuz ekiple bir <b>mobil oyun</b> geliştirdik. Bu süreçte <b>mobil oyun geliştirme ve optimizasyon</b> konularında pratik deneyim edindim." data-en="After training, the team we formed built a <b>mobile game</b>. In the process I gained hands-on experience in <b>mobile game development and optimization</b>.">Eğitimlerin ardından kurduğumuz ekiple bir <b>mobil oyun</b> geliştirdik. Bu süreçte <b>mobil oyun geliştirme ve optimizasyon</b> konularında pratik deneyim edindim.</div>
+    </div>
+    <div class="tl reveal">
+      <div class="role">Ciner Yayın Holding <span data-tr="— Bilgi İşlem Stajyeri" data-en="— IT Intern">— Bilgi İşlem Stajyeri</span></div>
+      <div class="co-date">2018 – 2019 · 9 <span data-tr="ay" data-en="months">ay</span></div>
+      <div class="d" data-tr="Bilgi işlem bölümünde <b>yazılım ve donanım</b> alanında deneyim kazandım; profesyonel iş ve şirket kültürüne dair önemli tecrübeler edindim." data-en="In the IT department I gained hands-on <b>software and hardware</b> experience, and developed a strong sense of professional and corporate culture.">Bilgi işlem bölümünde <b>yazılım ve donanım</b> alanında deneyim kazandım; profesyonel iş ve şirket kültürüne dair önemli tecrübeler edindim.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SKILLS -->
+<section id="skills"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="sec-tag" data-tr="04 — Yetenekler" data-en="04 — Skills">04 — Yetenekler</div>
+    <div class="sec-title" data-tr="Kullandığım <span class='g'>araçlar</span>" data-en="Tools I <span class='g'>use</span>">Kullandığım <span class="g">araçlar</span></div>
+  </div>
+  <div class="skills">
+    <div class="skill-card reveal"><div class="h" data-tr="Oyun Motorları" data-en="Game Engines">Oyun Motorları</div><div class="chips"><span>Unity</span><span>Unreal Engine</span><span>Godot</span><span>Twine</span><span>Bitsy</span><span>PuzzleScript</span></div></div>
+    <div class="skill-card reveal"><div class="h" data-tr="Programlama" data-en="Programming">Programlama</div><div class="chips"><span>C#</span><span>JavaScript</span><span>HTML</span><span>CSS</span><span>PHP</span></div></div>
+    <div class="skill-card reveal"><div class="h" data-tr="Araçlar" data-en="Tools">Araçlar</div><div class="chips"><span>Git</span><span>GitHub</span><span>Sourcetree</span><span>Rider</span><span>VS Code</span></div></div>
+    <div class="skill-card reveal"><div class="h" data-tr="Tasarım & Sanat" data-en="Design & Art">Tasarım & Sanat</div><div class="chips"><span>Blender</span><span>Photoshop</span><span>Illustrator</span><span>Animate</span></div></div>
+    <div class="skill-card reveal" style="grid-column:1/-1"><div class="h" data-tr="AI Araçları" data-en="AI Tools">AI Araçları</div><div class="chips"><span>Claude</span><span>ChatGPT</span><span>Gemini</span><span>Meshy</span><span>Vibecoding</span></div></div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact"><div class="wrap">
+  <div class="contact-box reveal">
+    <h2 data-tr="Birlikte bir şeyler <span class='g'>yapalım</span>" data-en="Let's <span class='g'>build</span> something">Birlikte bir şeyler yapalım</h2>
+    <p data-tr="İş, proje ya da işbirliği için ulaşabilirsin." data-en="Reach out for a job, a project, or a collaboration.">İş, proje ya da işbirliği için ulaşabilirsin.</p>
+    <div class="socials">
+      <a class="mail" href="mailto:cpn1230@gmail.com">✉ cpn1230@gmail.com</a>
+      <a href="https://linkedin.com/in/furkanbalcı" target="_blank">in · LinkedIn</a>
+      <a href="https://github.com/furkanblci" target="_blank">⌘ GitHub</a>
+      <a href="https://furkanbalci.itch.io" target="_blank">◈ itch.io</a>
+      <a href="https://store.steampowered.com/app/3207800" target="_blank">▶ Steam</a>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap">© 2026 Furkan Balcı · <span data-tr="Unity / C# Oyun Geliştirici" data-en="Unity / C# Game Developer">Unity / C# Oyun Geliştirici</span> · <b>furkanblci.github.io</b></div>
+</footer>
+
+<script>
+  // language toggle
+  function setLang(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-tr]').forEach(e=>{
+      const v=e.getAttribute('data-'+l); if(v!==null) e.innerHTML=v;
+    });
+    document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+    const cv=l==='tr'?'resume-tr.html':'resume-en.html';
+    const a1=document.getElementById('cvlink'), a2=document.getElementById('cvlink2');
+    if(a1)a1.href=cv; if(a2)a2.href=cv;
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  let saved='tr'; try{saved=localStorage.getItem('lang')||'tr'}catch(e){}
+  setLang(saved);
+
+  // nav scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30));
+
+  // burger
+  const burger=document.getElementById('burger'), navlinks=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
