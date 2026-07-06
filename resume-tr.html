@@ -82,7 +82,8 @@
   .ref{margin-bottom:10px}
   .ref b{display:block;font-size:11px;color:var(--ink);font-weight:700}
   .ref small{display:block;color:var(--muted);font-size:10px;margin-top:1px}
-  .ref .ph{color:var(--faint);font-size:10px}
+  .ref .ph{color:var(--faint);font-size:10px;display:block}
+  .ref-note{color:var(--muted);font-size:11px;line-height:1.5}
 
   /* main blocks */
   .summary{font-size:11.5px;line-height:1.6;color:var(--sub)}
@@ -97,9 +98,9 @@
   .job .d{font-size:11px;color:var(--muted);line-height:1.52;margin-top:4px}
   .job .d b{color:var(--sub);font-weight:600}
 
-  .proj-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}
+  .proj-grid{display:block}
   .proj{padding:6px 0;border-bottom:1px solid var(--line-soft)}
-  .proj-grid .proj:nth-last-child(-n+2){border-bottom:0}
+  .proj:last-of-type{border-bottom:0}
   .proj .t{font-size:12px;font-weight:700;color:var(--ink)}
   .proj .meta{font-size:10.5px;color:var(--accent);margin:2px 0 2px;font-weight:600}
   .proj .d{font-size:10.5px;color:var(--muted);line-height:1.45}
@@ -108,47 +109,45 @@
     margin-left:5px;vertical-align:middle;text-transform:uppercase}
   .more{font-size:10.5px;color:var(--muted);margin-top:8px}
   .more a{color:var(--accent);font-weight:700}
+  .about-full{padding:16px 26px 4px}
 
   @media print{
     @page{size:A4;margin:0}
     html,body{background:#fff}
     .page{margin:0;box-shadow:none;width:210mm;min-height:297mm}
     *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    /* compress to fit a single A4 page */
-    .header{padding:10px 24px 7px;gap:16px}
-    .photo{width:98px;height:98px}
-    .name{font-size:26px}
-    .title{font-size:11.5px;margin-top:4px}
-    .contact a,.contact .loc{font-size:11px;margin:0}
-    .contact{gap:4px}
-    .links-wrap{padding:0 24px 9px}
-    .links a{padding:6.5px 8px;font-size:10.5px}
-    .side{padding:11px 14px 12px}
-    .main{padding:9px 22px 10px}
-    h2{margin-bottom:5px;padding-bottom:3px;font-size:12.5px}
-    .side h2{font-size:11.5px}
+    /* one-page fit — readable & airy (~10.3px) */
+    .header{padding:9px 26px 6px}
+    .about-full{padding:6px 26px 2px}
     .sec{margin-bottom:6px}
-    .summary{font-size:9.6px;line-height:1.32}
-    .job{padding:2.5px 0}
-    .job .co{font-size:11px}
-    .job .date{font-size:9px}
-    .job .d{font-size:9.2px;line-height:1.3;margin-top:1.5px}
-    .proj{padding:2px 0}
-    .proj .t{font-size:11px}
-    .proj .meta{font-size:9.4px;margin:1px 0}
-    .proj .d{font-size:9.2px;line-height:1.28}
+    .summary{font-size:10.3px;line-height:1.4}
+    .side{padding:10px 15px 10px}
+    .main{padding:10px 22px 10px}
+    h2{margin-bottom:5px;padding-bottom:2.5px;font-size:12.5px}
+    .side h2{font-size:11.5px}
     .edu-item{margin-bottom:5px}
-    .edu-item .s{font-size:10.8px}
-    .edu-item .p{font-size:10.2px}
-    .edu-item .d{font-size:9.5px}
-    .skill-grp{margin-bottom:4.5px}
-    .skill-grp .lbl{margin-bottom:3.5px}
-    .chip{font-size:9.5px;padding:2px 5px}
-    .ref{margin-bottom:4.5px}
-    .lang{margin:2.5px 0}
-    .more{margin-top:4px;font-size:9.5px}
+    .edu-item .s{font-size:11px}
+    .edu-item .p{font-size:10.3px}
+    .skill-grp{margin-bottom:5px}
+    .skill-grp .lbl{margin-bottom:3px}
+    .chip{font-size:9.8px;padding:2px 6px}
+    .lang{margin:3px 0}
+    .ref{margin-bottom:5px}
+    .ref b{font-size:10.3px}
+    .ref small{font-size:9.3px}
+    .ref .ph{font-size:9.3px}
+    .job{padding:4px 0}
+    .job .co{font-size:11.5px}
+    .job .date{font-size:9.3px}
+    .job .d{font-size:10.3px;line-height:1.36}
+    .proj{padding:3.5px 0}
+    .proj .t{font-size:11.5px}
+    .proj .meta{font-size:10px}
+    .proj .d{font-size:10.3px;line-height:1.34}
+    .award{font-size:8px;padding:1.5px 5px}
+    .more{font-size:10px;margin-top:6px}
   }
-  @media(max-width:800px){.page{width:100%}.body{grid-template-columns:1fr}.header{flex-wrap:wrap}.links{flex-wrap:wrap}}
+  @media screen and (max-width:800px){.page{width:100%}.body{grid-template-columns:1fr}.header{flex-wrap:wrap}.links{flex-wrap:wrap}.proj-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -180,6 +179,14 @@
     </nav>
   </div>
 
+  <!-- ABOUT (full width) -->
+  <section class="about-full">
+    <div class="sec">
+      <h2>Hakkımda</h2>
+      <p class="summary">Unity ve C# ile oyun geliştiren, yapımın hemen her aşamasında sorumluluk almış bir geliştiriciyim; İstanbul Topkapı Üniversitesi <b>Dijital Oyun Tasarımı</b> mezunuyum. Ağırlıklı olarak <b>oynanış mekaniklerini ve oyun sistemlerini C# ile</b> kuruyor, bunun yanında level tasarımı ve GDD gibi tasarım işlerinde de üretiyorum. Bugüne dek 20'den fazla projede görev aldım; bir kısmını baştan sona tek başıma, bir kısmını ekiplerle birlikte geliştirdim. Son dönemde odağımı mobile kaydırdım; mobil oyun geliştirme ve optimizasyon tarafında kendimi geliştirmeye devam ediyorum. Şu anda okul ekibimle bitirme oyunumuzu Steam'de, iki mobil oyunumu da Google Play'de yayına hazırlıyorum.</p>
+    </div>
+  </section>
+
   <!-- BODY -->
   <div class="body">
     <!-- SIDEBAR -->
@@ -207,43 +214,37 @@
         <div class="skill-grp"><div class="lbl">Araçlar</div>
           <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Sourcetree</span><span class="chip">Rider</span><span class="chip">VS Code</span></div></div>
         <div class="skill-grp"><div class="lbl">Tasarım & Sanat</div>
-          <div class="chips"><span class="chip">Blender</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Animate</span></div></div>
+          <div class="chips"><span class="chip">Blender</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Animate</span><span class="chip">Adobe XD</span></div></div>
         <div class="skill-grp"><div class="lbl">AI Araçları</div>
           <div class="chips"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Gemini</span><span class="chip">Meshy</span><span class="chip">Vibecoding</span></div></div>
       </div>
 
       <div class="sec">
         <h2>Diller</h2>
-        <div class="lang"><b>Türkçe</b><span>Ana dil</span></div>
         <div class="lang"><b>İngilizce</b><span></span></div>
       </div>
 
       <div class="sec">
         <h2>Referanslar</h2>
-        <div class="ref" style="color:var(--muted);font-size:11px">İstek üzerine sağlanır.</div>
+        <div class="ref-note">İstek üzerine sağlanır.</div>
       </div>
     </aside>
 
     <!-- MAIN -->
     <main class="main">
       <div class="sec">
-        <h2>Hakkımda</h2>
-        <p class="summary">Unity ve C# ile geliştirme yapan bir oyun geliştiricisiyim; İstanbul Topkapı Üniversitesi <b>Dijital Oyun Tasarımı</b> bölümünden mezun oldum. Mekanik ve oynanış sistemleri kurmaktan level tasarımına ve GDD yazımına kadar oyun geliştirmenin her alanında çalıştım ve <b>ekip içinde üretmeye</b> alışkınım. 20'den fazla projede yer aldım; bir kısmına katkı sundum, bir kısmını sıfırdan geliştirdim. Ayrıca <b>mobil oyun geliştirme ve optimizasyon</b> konusunda deneyim edindim. Şu anda okul ekibimle bitirme projemizi <b>Steam'de yayına</b> hazırlıyor, 2 yeni oyunumu da <b>Google Play'de</b> yayınlıyorum.</p>
-      </div>
-
-      <div class="sec">
         <h2>Deneyim</h2>
         <div class="job">
-          <div class="top"><div class="co">Pattern Games <span class="rl">— Oyun Geliştirici</span></div><div class="date">2023 – 2025 · 2,5 yıl</div></div>
-          <div class="d">Ekiple 2,5 yıl boyunca, Steam'de demosu yayında olan bir <b>3D FPS</b> oyunu geliştirdik. Ağırlıklı olarak <b>C# ile oynanış ve oyun sistemlerinin</b> geliştirilmesinde çalıştım; bunun yanında seviye tasarımı dâhil projenin birçok alanında görev aldım. Bu süreçte çeşitli etkinliklere katılıp stand açtık, oyunumuzu tanıttık ve katıldığımız jam ve yarışmalarda <b>birincilikler, ödüller</b> kazandık.</div>
+          <div class="top"><div class="co">Pattern Games <span class="rl">— Game Developer</span></div><div class="date">2023 – 2025 · 2,5 yıl</div></div>
+          <div class="d">Ekibimizle 2,5 yıl boyunca, Steam'de demosu yayında olan hikâyeli 3D FPS oyunumuz <b>Madness of the Science</b>'ı geliştirdik. Ağırlıklı olarak oynanış mekaniklerini ve oyun sistemlerini <b>C#</b> ile kurdum; seviye tasarımı dâhil projenin birçok tarafında görev aldım. Bu süreçte <b>Entertech</b> ve <b>OGEM</b> gibi kuluçka programlarına katılıp eğitimler aldık, çeşitli fuar ve etkinliklerde stand açtık; katıldığımız game jam'lerde de birincilikler ve ödüller kazandık.</div>
         </div>
         <div class="job">
-          <div class="top"><div class="co">UDO <span class="rl">— Oyun Geliştirici Stajyeri</span></div><div class="date">Tem – Ağu 2025 · 2 ay</div></div>
-          <div class="d">Eğitimler aldıktan sonra kurduğumuz ekiple fikir geliştirme ve proje belirleme sürecinden geçerek sektöre uygun bir mobil oyun geliştirdik. Bu süreçte <b>mobil oyun geliştirme ve mobil optimizasyon</b> konularında pratik deneyim edindim.</div>
+          <div class="top"><div class="co">UDO <span class="rl">— Game Developer Intern</span></div><div class="date">Tem – Ağu 2025 · 2 ay</div></div>
+          <div class="d">Staj süresi boyunca önce mobil oyun geliştirmenin farklı alanlarında, işin uzmanı isimlerden eğitimler aldım. Aldığım eğitimleri gerçek problemler üzerinde uygulayıp pratikte pekiştirdim; son aşamada ise kurduğumuz ekiple sektöre yönelik, yayınlanabilir bir <b>mobil oyun</b> geliştirdik.</div>
         </div>
         <div class="job">
-          <div class="top"><div class="co">Ciner Yayın Holding <span class="rl">— Bilgi İşlem Stajyeri</span></div><div class="date">2018 – 2019 · 9 ay</div></div>
-          <div class="d">9 ay boyunca bilgi işlem bölümünde <b>yazılım ve donanım</b> alanında deneyim kazandım; aynı zamanda profesyonel iş ve şirket kültürüne dair önemli tecrübeler edindim.</div>
+          <div class="top"><div class="co">Ciner Yayın Holding <span class="rl">— IT Intern</span></div><div class="date">2018 – 2019 · 9 ay</div></div>
+          <div class="d">9 ay boyunca bilgi işlem bölümünde <b>yazılım ve donanım</b> alanında deneyim kazandım; <b>problem çözme</b> becerimi geliştirdim ve profesyonel iş ile şirket kültürüne dair önemli tecrübeler edindim.</div>
         </div>
       </div>
 
@@ -253,28 +254,40 @@
         <div class="proj">
           <div class="t">Carry On Together</div>
           <div class="meta">Bitirme Projesi · Steam'de yayına hazırlanıyor</div>
-          <div class="d">Arkadaşlarınla birlikte eşya taşıdığın, co-op bir parti simülasyonu.</div>
+          <div class="d">Arkadaşlarınla eşyaları taşıyıp yerleştirdiğin, kaosun eğlenceye döndüğü co-op bir parti oyunu. Bitirme projemiz olarak geliştiriyoruz.</div>
         </div>
         <div class="proj">
           <div class="t">Madness of the Science</div>
-          <div class="meta">3D FPS · Steam (Demo) · Pattern Games</div>
-          <div class="d">Ekiple 2,5 yılda geliştirdiğimiz, Steam'de demosu yayında olan 3D FPS.</div>
+          <div class="meta">Hikâyeli 3D FPS · Steam (Demo) · Pattern Games</div>
+          <div class="d">Pattern Games ekibiyle geliştirdiğimiz en kapsamlı projem; bilim kurgu temalı, hikâyeli bir 3D FPS. İki kişilik geliştirici ekibin bir parçası olarak oynanış mekaniklerini ve oyun sistemlerini C# ile kurdum; seviye tasarımına da katkı verdim. Steam'de demo olarak yayında.</div>
         </div>
         <div class="proj">
-          <div class="t">UDO Stock Match</div>
-          <div class="meta">Mobil · Staj Projesi</div>
-          <div class="d">Konveyör bandındaki objeleri toplayıp eşleştirmeye dayalı bir mobil oyun.</div>
-        </div>
-        <div class="proj">
-          <div class="t">Soul Gate <span class="award">1.'lik</span></div>
+          <div class="t">Soul Gate <span class="award">Game Jam 1.'lik</span></div>
           <div class="meta">3D İzometrik Aksiyon · StartGate Game Jam</div>
+          <div class="d">48 saatlik game jam'de ekibimizle geliştirip birincilik kazandığımız 3D izometrik bir aksiyon oyunu.</div>
         </div>
         <div class="proj">
-          <div class="t">Devil Journey <span class="award">En İyi Oyun Tasarımı</span></div>
-          <div class="meta">2D Puzzle-Platformer · Global Game Jam</div>
+          <div class="t">Devil Journey <span class="award">Game Jam En İyi Mekanik</span></div>
+          <div class="meta">2D Puzzle-Platformer · Global Game Jam 2024</div>
+          <div class="d">48 saatte geliştirip <b>En İyi Mekanik Tasarımı</b> ödülünü kazandığımız 2D puzzle-platformer bir jam oyunu.</div>
         </div>
+        <div class="proj">
+          <div class="t">Stock Match</div>
+          <div class="meta">Mobil · Staj Projesi · UDO Games</div>
+          <div class="d">UDO Games stajında stajyer ekibimizle geliştirdiğimiz, triple match mekaniğine dayanan casual bir mobil bulmaca oyunu.</div>
+        </div>
+        <div class="proj">
+          <div class="t">Blattodea</div>
+          <div class="meta">Mobil (Android) · Puzzle & Narrative</div>
+          <div class="d">Okul projesi olarak geliştirdiğimiz; bireyin sıkıntı ve buhranları sonucu hamamböceğine dönüşmesini işleyen, Franz Kafka'nın "Dönüşüm"ünden uyarlanmış 2D puzzle & narrative bir mobil oyun.</div>
+        </div>
+        <div class="proj">
+          <div class="t">LazCar GP</div>
+          <div class="meta">Mobil · Arcade Yarış</div>
+          <div class="d">Okul projesi olarak geliştirdiğimiz; Karadeniz temalı tahta arabalarla yarışıp power-up'lar kullandığımız bir mobil arcade yarış oyunu.</div>
         </div>
         <div class="more">20+ oyun ve diğer projelerim → <a href="https://furkanbalci.itch.io">furkanbalci.itch.io</a></div>
+        </div>
       </div>
     </main>
   </div>
